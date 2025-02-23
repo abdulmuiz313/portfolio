@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 20px 10px;
+      position: fixed;
+      width: 100px;
+      height: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    nav ul li {
+      margin: 15px 0;
+      text-align: center;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      display: block;
+      padding: 15px;
+      transition: transform 0.3s, background 0.3s, border-radius 0.3s;
+    }
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.1);
+      border-radius: 10px;
+    }
+    main {
+      margin-left: 120px;
+      width: calc(100% - 120px);
+      padding: 20px;
+    }
+    section {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+    section.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      color: black;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      text-align: center;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Chat Widget Styles */
+    #chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #chat-toggle:hover {
+      background-color: #0056b3;
+    }
+    #chat-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      z-index: 1000;
+    }
+    #chat-header {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-header-buttons {
+      display: flex;
+      gap: 5px;
+    }
+    .header-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+    }
+    #chat-messages {
+      padding: 10px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #333;
+    }
+    .chat-message {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+    .user-message {
+      background-color: #DCF8C6;
+      text-align: right;
+    }
+    .bot-message {
+      background-color: #F1F0F0;
+      text-align: left;
+    }
+    #chat-input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      border-radius: 0 0 0 10px;
+    }
+    #send-btn {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 0 0 10px 0;
+      transition: background-color 0.3s;
+      font-size: 14px;
+    }
+    #send-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#home" onclick="showSection('home')">Home</a></li>
+      <li><a href="#about" onclick="showSection('about')">About</a></li>
+      <li><a href="#skills" onclick="showSection('skills')">Skills</a></li>
+      <li><a href="#projects" onclick="showSection('projects')">Projects</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section id="home" class="active">
+      <h1>Welcome to My Portfolio</h1>
+      <p>I am a Data Scientist passionate about machine learning, data analytics, and AI-driven solutions.</p>
+    </section>
+    
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Detail about experience, projects, and technical skills.</p>
+    </section>
+    
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card-container">
+        <div class="card">Python</div>
+        <div class="card">Machine Learning</div>
+      </div>
+    </section>
+    
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="card-container">
+        <div class="card">Project 1: AI Chatbot</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chat Widget -->
+  <button id="chat-toggle"><i class="fas fa-comment-alt"></i></button>
+  <div id="chat-container">
+    <div id="chat-header">
+      <span>Chat Assistant</span>
+      <div class="chat-header-buttons">
+        <button id="clear-btn" class="header-btn">Clear</button>
+        <button id="close-btn" class="header-btn">&times;</button>
+      </div>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type your message...">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Portfolio Section Toggle
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Chat Widget Functionality
+    const API_KEY = "AIzaSyA-0zY45npWMggwFlOLStUMzQZfq-etIzU"; // Add your Gemini API key here
+    const GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=" + API_KEY;
+
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatContainer = document.getElementById('chat-container');
+    const closeBtn = document.getElementById('close-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const sendBtn = document.getElementById('send-btn');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    chatToggle.addEventListener('click', () => {
+      chatContainer.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      chatContainer.style.display = 'none';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      chatMessages.innerHTML = '';
+    });
+
+    function addMessage(content, className) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-message ${className}`;
+      msgDiv.textContent = content;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function getChatResponse(message) {
+      const SYSTEM_PROMPT = `<system_prompt>
+YOU ARE A PERSONAL AI REPRESENTATIVE FOR **John Doe**, AN ASSOCIATE DATA SCIENTIST CURRENTLY WORKING AT Kio LTD. YOUR PURPOSE IS TO PROVIDE INFORMATION STRICTLY RELATED TO John Doe'S PROFESSIONAL BACKGROUND, SKILLS, EDUCATION, AND PROJECTS. ANY UNRELATED QUESTION MUST BE DENIED SARCASTICALLY, BUT NOT WITH FIXED RESPONSES—INSTEAD, VARY YOUR REPLIES BASED ON CONTEXT.
+DO NOT LIE OR MENTION ANY OTHER ACHIVEMNETS THAN THE ONE GIVEN BELOW.
+### GREETINGS PROTOCOL
+- ALWAYS respond to greetings in a friendly and engaging manner.
+
+### John Doe - PROFESSIONAL SUMMARY
+John Doe is an **Associate Data Scientist at Kio Ltd.**, specializing in AI security, data science, and automation. He has successfully led multiple projects improving AI safety, efficiency, and reliability.
+
+### CONTACT INFORMATION
+- **Phone:** +91 8879099411
+- **Email:** johndoe4@gmail.com
+- **LinkedIn:** [John Doe](https://www.linkedin.com/in/john-doe-28152920b/)
+
+### TECHNICAL SKILLS
+- **Programming:** Python  
+- **Databases:** SQL, Milvus, MongoDB  
+- **Data Science:** TensorFlow, RAGs, LangChain, Scikit Learn, PySpark  
+- **Big Data & Cloud:** Hive, Kafka, Airflow  
+- **Web Frameworks:** FastAPI, Flask, Django  
+
+### STRICT RULES FOR RESPONDING:
+1. **Always respond to greetings naturally and appropriately.**
+2. **ONLY** answer questions related to John Doe’s professional details, projects, skills, or education.
+3. **If asked an unrelated question, craft a unique sarcastic denial based on context, rather than repeating fixed phrases.** Examples:
+   - If someone asks about politics: _"john’s too busy training models to train politicians."_
+   - If asked about cooking: _"john can whip up a neural network, but a good curry? That’s another story."_
+4. **KEEP RESPONSES MINIMAL**—no unnecessary elaboration.
+</system_prompt>`;
+
+      const requestBody = {
+        contents: [{ parts: [{ text: `${SYSTEM_PROMPT}\n\nUser Query: ${message}` }] }]
+      };
+
+      try {
+        const response = await fetch(GEMINI_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Referer": "https://johndoe.github.io/portfolio/"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        const data = await response.json();
+        console.log("Gemini Response:", data);
+
+        if (data && data.candidates && data.candidates.length > 0) {
+          addMessage('bot-message', data.candidates[0].content.parts[0].text);
+        } else {
+          addMessage('bot-message', "No valid response received.");
+        }
+      } catch (error) {
+        console.error("Error fetching response:", error);
+        addMessage('bot-message', "Error fetching response. Please try again.");
+      }
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const message = chatInput.value.trim();
+      if (message) {
+        addMessage(message, 'user-message');
+        chatInput.value = '';
+        getChatResponse(message);
+      }
+    });
+
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && chatInput.value.trim()) {
+        const message = chatInput.value.trim();
+        addMessage(message, 'user-message');
+        chatInput.value = '';
+        getChatResponse(message);
+      }
+    });
+  </script>
+</body>
+</html>
